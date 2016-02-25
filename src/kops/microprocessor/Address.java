@@ -1,20 +1,27 @@
 package kops.microprocessor;
 
-import java.util.ArrayList;
-
 public class Address {
 
 	private char firstWord;
 	private char secondWord;
+	private String address;
 
 	public Address(String string) {
+		this.address = string;
 		this.firstWord = string.charAt(0);
 		this.secondWord = string.charAt(1);
 	}
 
-	public Word getContents() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getAddress() {
+		return this.address;
+	}
+
+	public char getFirstWord() {
+		return firstWord;
+	}
+
+	public char getSecondWord() {
+		return secondWord;
 	}
 
 	

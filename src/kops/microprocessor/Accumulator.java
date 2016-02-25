@@ -2,19 +2,17 @@ package kops.microprocessor;
 
 public class Accumulator {
 	
-	private char letter;
-	//private Address address;
-	private Word word;
+	private String word;
 	
-	public Accumulator(char letter){
-		this.letter = letter;
+	public Accumulator(){
+		this.word = "0"; 	//default
 	}
 	
-	private void setWord(Address address){
-		this.word = address.getContents();
+	public void setWord(String word){
+		this.word = word;
 	}
 	
-	private Word getWord(){
+	public String getWord(){
 		return this.word;
 	}
 	

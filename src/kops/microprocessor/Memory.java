@@ -2,19 +2,25 @@ package kops.microprocessor;
 
 public class Memory {
 
-	private Address address;
-	private char contents;
+	private String[] words;
+		
+	public Memory(String input){
+		this.words = input.split("");
+	}
+
+	public String[] getMemory() {
+		return words;
+	}
+
+	public void setContent(int index, String word) {
+		//CONVERT FROM HEX TO DECIMAL
+		//int addressToDecimal = address.getAddress();
+		//this.words[addressToDecimal] = word;
+		words[index] = word;
+	}
 	
-	public Memory(Address address){
-		this.address = address;
-	}
-
-	public char getContents() {
-		return contents;
-	}
-
-	public void setContents(char contents) {
-		this.contents = contents;
+	public String getContent(int index){
+		return words[index];
 	}
 	
 	
