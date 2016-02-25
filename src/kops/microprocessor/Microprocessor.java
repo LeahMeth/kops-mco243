@@ -38,6 +38,7 @@ public class Microprocessor {
 							+ memory.getContent(index++));
 					this.addressInDec = getDecimal(address);
 					this.accA.setWord(memory.getContent(addressInDec));
+					System.out.println("Loaded A with "+memory.getContent(addressInDec)+"from address in dec"+addressInDec);
 					break;
 
 				// ST - write contents of A to memory with the following address
@@ -47,6 +48,7 @@ public class Microprocessor {
 							+ memory.getContent(index++));
 					this.addressInDec = getDecimal(address);
 					memory.setContent(addressInDec, accA.getWord());
+					System.out.println("wrote "+accA.getWord()+"from A to address"+addressInDec);
 					break;
 
 				// SWP - swap contents of A and B
@@ -55,6 +57,7 @@ public class Microprocessor {
 					String tempWord = accA.getWord();
 					accA.setWord(accB.getWord());
 					accB.setWord(tempWord);
+					System.out.println("Swapped a and b");
 					break;
 
 				// ADD - add contents of accumulators.
@@ -66,10 +69,12 @@ public class Microprocessor {
 					int sum = content1 + content2;
 					//convert into hex and place in accumulators
 					String hexValue = Integer.toHexString(sum);
-					String hexSumLow = hexValue.substring(0, 0);
-					String hexSumHigh = hexValue.substring(1, 1);
-					accA.setWord(hexSumLow);
-					accB.setWord(hexSumHigh);
+					String hexSumLow = hexValue.split("")[0];
+					String hexSumHigh = hexValue.split("")[1];
+					accA.setWord(hexSumHigh);
+					accB.setWord(hexSumLow);
+					System.out.println("added "+content1+"from a and "+content2+"from b...");
+					System.out.println("and got "+hexSumLow+" "+hexSumHigh);
 					break;
 
 				// INC - increment A
@@ -85,6 +90,7 @@ public class Microprocessor {
 						incrementHex = Integer.toHexString(tempInt);
 					}
 					accA.setWord(incrementHex);					
+					System.out.println("incremented a and got "+incrementHex);
 					break;
 
 				// DEC - decrement A
@@ -100,6 +106,7 @@ public class Microprocessor {
 						decrementHex = Integer.toHexString(tempInt);
 					}
 					accA.setWord(decrementHex);	
+					System.out.println("decremented a and got "+decrementHex);
 					break;
 
 				// BZ - if A is 0, execute the command at following address
@@ -108,28 +115,32 @@ public class Microprocessor {
 					if(accA.getWord().equals("0")){
 						address = new Address(memory.getContent(index++) + memory.getContent(index++));
 						index = getDecimal(address);
+						System.out.println("A was 0 so jumped to "+index);
 					}
 					else{	//ignore argument
 						index += 2;
+						System.out.println("A was not 0");
 					}
 					break;
 
 				// BR - execute command at following address
 				case "7":
 					address = new Address(memory.getContent(++index) + memory.getContent(++index));
-					index = getDecimal(address);					
+					index = getDecimal(address);	
+					System.out.println("jumped to "+index);
 					break;
 
 				// STP stop the program
 				case "8":
 					System.out.println("Stopped execution");
-					break;
+					return;
 
 				}
 			}
 			
 			output.append(memory.getMemory()) ;
 			output.append("\n");
+			System.out.println(output.toString());
 		}
 		fileInput.close();
 
