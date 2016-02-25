@@ -47,7 +47,7 @@ public class Microprocessor {
 					address = new Address(memory.getContent(index++)
 							+ memory.getContent(index++));
 					this.addressInDec = getDecimal(address);
-					memory.setContent(addressInDec, accA.getWord());
+					memory.setContent(addressInDec, accA.getWord().toUpperCase());
 					System.out.println("wrote "+accA.getWord()+"from A to address"+addressInDec);
 					break;
 
