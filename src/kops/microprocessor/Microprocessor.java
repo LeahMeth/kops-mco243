@@ -38,7 +38,7 @@ public class Microprocessor {
 							+ memory.getContent(index++));
 					this.addressInDec = getDecimal(address);
 					this.accA.setWord(memory.getContent(addressInDec));
-					System.out.println("Loaded A with "+memory.getContent(addressInDec)+"from address in dec"+addressInDec);
+					System.out.println("Loaded A with "+memory.getContent(addressInDec)+" from address in dec"+addressInDec);
 					break;
 
 				// ST - write contents of A to memory with the following address
@@ -48,7 +48,7 @@ public class Microprocessor {
 							+ memory.getContent(index++));
 					this.addressInDec = getDecimal(address);
 					memory.setContent(addressInDec, accA.getWord().toUpperCase());
-					System.out.println("wrote "+accA.getWord()+"from A to address"+addressInDec);
+					System.out.println("wrote "+accA.getWord()+" from A to address"+addressInDec);
 					break;
 
 				// SWP - swap contents of A and B
@@ -73,8 +73,8 @@ public class Microprocessor {
 					String hexSumHigh = hexValue.split("")[1];
 					accA.setWord(hexSumHigh);
 					accB.setWord(hexSumLow);
-					System.out.println("added "+content1+"from a and "+content2+"from b...");
-					System.out.println("and got "+hexSumLow+" "+hexSumHigh);
+					System.out.println("added "+content1+" from a and "+content2+" from b...");
+					System.out.println("and got "+hexValue);
 					break;
 
 				// INC - increment A
@@ -140,6 +140,8 @@ public class Microprocessor {
 			
 			output.append(memory.getMemory()) ;
 			output.append("\n");
+			memory = new Memory(fileInput.next());
+			index = 0;
 			System.out.println(output.toString());
 		}
 		fileInput.close();
