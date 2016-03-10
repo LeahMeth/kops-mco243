@@ -1,7 +1,9 @@
 package kops.microprocessor;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Microprocessor {
@@ -17,12 +19,13 @@ public class Microprocessor {
 	private int tempInt;
 
 	public Microprocessor(String string) throws FileNotFoundException {
-		this.fileInput = new Scanner(new File(string));
+		//this.fileInput = new Scanner(new File(string));
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		this.output = new StringBuilder();
 		this.index = 0;
 		this.accA = new Accumulator();
 		this.accB = new Accumulator();
-		this.memory = new Memory(fileInput.next());
+		this.memory = new Memory(in);
 	}
 
 	public void run() {

@@ -1,13 +1,15 @@
 package kops.microprocessor;
 
+import java.io.BufferedReader;
+
 public class Memory {
 
 	private String[] words;
 	private StringBuilder wordsList;
 		
-	public Memory(String input){
+	public Memory(BufferedReader in){
 		wordsList = new StringBuilder();
-		this.words = input.split("");
+		this.words = in.split("");
 	}
 
 	public String getMemory() {
