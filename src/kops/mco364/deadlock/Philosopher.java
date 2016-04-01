@@ -2,10 +2,11 @@ package kops.mco364.deadlock;
 
 public class Philosopher extends Thread{
 	
-	
+	private String name;
 	private Fork f1, f2;
 	
-	public Philosopher(Fork f1, Fork f2){
+	public Philosopher(String name, Fork f1, Fork f2){
+		this.name = name;
 		this.f1 = f1;
 		this.f2 = f2;
 	}
@@ -20,7 +21,12 @@ public class Philosopher extends Thread{
 	
 	
 	public void eat(){
-		f1.pickUp();
+		System.out.println(this + " trying to pick up "+f1);
+		synchronized(f1){
+			synchronized(f2){
+				
+			}
+		}
 		f2.pickUp();
 		
 		waitABit();

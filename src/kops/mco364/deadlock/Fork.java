@@ -4,7 +4,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Fork{
 	
-	public boolean pickedUp;
+	
+	private int number;
+	
+	/*public boolean pickedUp;
 
 	public void pickUp(){
 		
@@ -12,6 +15,6 @@ public class Fork{
 	
 	public void putDown(){
 		
-	}
+	}*/
 	
 }
