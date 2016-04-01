@@ -22,42 +22,33 @@ public class Compiler {
 		case "LD":
 			machineCode.append("0");
 			machineCode.append(decToHex(reader.next()));
-			System.out.println(machineCode.toString());
 			break;
 		case "ST":
 			machineCode.append("1");
 			machineCode.append(decToHex(reader.next()));
-			System.out.println(machineCode.toString());
 			break;
 		case "SWP":
 			machineCode.append("2");
-			System.out.println(machineCode.toString());
 			break;
 		case "ADD":
 			machineCode.append("3");
-			System.out.println(machineCode.toString());
 			break;
 		case "INC":
 			machineCode.append("4");
-			System.out.println(machineCode.toString());
 			break;
 		case "DEC":
 			machineCode.append("5");
-			System.out.println(machineCode.toString());
 			break;
 		case "BZ":
 			machineCode.append("6");
 			machineCode.append(decToHex(reader.next()));
-			System.out.println(machineCode.toString());
 			break;
 		case "BR":
 			machineCode.append("7");
 			machineCode.append(decToHex(reader.next()));
-			System.out.println(machineCode.toString());
 			break;
 		case "STP":
 			machineCode.append("8");
-			System.out.println(machineCode.toString());
 			break;
 		case "DATA":
 			while(reader.hasNext()){
