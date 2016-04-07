@@ -1,51 +1,53 @@
 package kops.mco364.deadlock;
 
-public class Philosopher extends Thread{
-	
+public class Philosopher extends Thread {
+
+	private Fork f1;
+	private Fork f2;
 	private String name;
-	private Fork f1, f2;
-	
-	public Philosopher(String name, Fork f1, Fork f2){
+
+	public Philosopher(String name, Fork f1, Fork f2) {
 		this.name = name;
 		this.f1 = f1;
 		this.f2 = f2;
 	}
-	
-	public void run(){
-		while(true){
-			think();
+
+	public void run() {
+		while (true) {
 			eat();
+			think();
 		}
 	}
-	
-	
-	
-	public void eat(){
-		System.out.println(this + " trying to pick up "+f1);
-		synchronized(f1){
-			synchronized(f2){
-				
+
+	public void eat() {
+		System.out.println(this + " trying to pick up " + f1);
+		synchronized (f1) {
+			waitForAFewSeconds(5);
+			System.out.println(this + " trying to pick up " + f2);
+			synchronized (f2) {
+				System.out.println(this + " eating...");
+				waitForAFewSeconds(5);
 			}
+			System.out.println(this + " put down " + f1);
 		}
-		f2.pickUp();
-		
-		waitABit();
-		
-		f1.putDown();
-		f2.putDown();
+		System.out.println(this + " put down " + f2);
 	}
-	
-	private void waitABit() {
+
+	public void think() {
+		waitForAFewSeconds(2);
+	}
+
+	private void waitForAFewSeconds(int seconds) {
 		try {
-			Thread.sleep((long) (Math.random() * 1000));
+			Thread.sleep((long) (seconds * 1000));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
-	public void think(){
-		
+	@Override
+	public String toString() {
+		return "Philosopher " + name;
 	}
 
 }

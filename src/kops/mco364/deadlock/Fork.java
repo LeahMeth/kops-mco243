@@ -1,20 +1,16 @@
 package kops.mco364.deadlock;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
-public class Fork{
-	
+public class Fork {
 	
 	private int number;
-	
-	/*public boolean pickedUp;
 
-	public void pickUp(){
-		
+	public Fork(int number) {
+		this.number = number;
 	}
-	
-	public void putDown(){
-		
-	}*/
+
+	@Override
+	public String toString() {
+		return "Fork " + number;
+	}
 	
 }
