@@ -1,40 +1,51 @@
 package kops.mco364.deadlock;
 
+import java.util.logging.Logger;
+
 public class Philosopher extends Thread {
 
 	private Fork f1;
 	private Fork f2;
 	private String name;
+	private Waiter waiter;
+	
+	private static final Logger LOGGER  = Logger.getLogger(Philosopher.class.getName());
 
-	public Philosopher(String name, Fork f1, Fork f2) {
+
+	public Philosopher(String name, Waiter waiter, Fork f1, Fork f2) {
 		this.name = name;
 		this.f1 = f1;
 		this.f2 = f2;
+		this.waiter = waiter;
 	}
 
 	public void run() {
 		while (true) {
-			eat();
 			think();
+			eat();
 		}
 	}
 
 	public void eat() {
-		System.out.println(this + " trying to pick up " + f1);
-		synchronized (f1) {
+		
+		LOGGER.info(this.toString()+" attempting to eat");
+		if(waiter.tryToEat(f1, f2)){
+			LOGGER.info(this.toString()+" eating");
 			waitForAFewSeconds(5);
-			System.out.println(this + " trying to pick up " + f2);
-			synchronized (f2) {
-				System.out.println(this + " eating...");
-				waitForAFewSeconds(5);
-			}
-			System.out.println(this + " put down " + f1);
+			f1.setInUse(true);
+			f2.setInUse(true);
+
 		}
-		System.out.println(this + " put down " + f2);
+		
+		
+		
 	}
 
 	public void think() {
 		waitForAFewSeconds(2);
+		LOGGER.info(this.toString()+" thinking");
+		f1.setInUse(false);
+		f2.setInUse(false);
 	}
 
 	private void waitForAFewSeconds(int seconds) {
