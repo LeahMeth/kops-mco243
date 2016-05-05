@@ -1,5 +1,7 @@
 package kops.scheduler;
 
+import java.util.Date;
+
 public class Job {
 
 	private String name;
@@ -10,21 +12,26 @@ public class Job {
 	private JobType type;
 	private int timeLeftToRun;
 
+	private Date deadline;
+	
 	private long lastRanAtTime;
 
-	public long getLastRanAtTime() {
-		return lastRanAtTime;
-	}
+	
 
-	public void setLastRanAtTime(long lastRanAtTime) {
-		this.lastRanAtTime = lastRanAtTime;
-	}
-
-	public Job(String name, Priority priority, JobType type, int timeLeftToRun) {
+	public Job(String name, Priority priority, JobType type, int timeLeftToRun, Date deadline) {
 		this.name = name;
 		this.priority = priority;
 		this.type = type;
 		this.timeLeftToRun = timeLeftToRun;
+		this.deadline = deadline;
+	}
+
+	public Date getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
 	}
 
 	public String getName() {
@@ -74,6 +81,14 @@ public class Job {
 	public void decrementTimeLeftToRun(int actualTimeSlice) {
 		this.timeLeftToRun -= actualTimeSlice;
 		
+	}
+	
+	public long getLastRanAtTime() {
+		return lastRanAtTime;
+	}
+
+	public void setLastRanAtTime(long lastRanAtTime) {
+		this.lastRanAtTime = lastRanAtTime;
 	}
 
 	public boolean isFinished() {
