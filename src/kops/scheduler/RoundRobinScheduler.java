@@ -15,7 +15,7 @@ public class RoundRobinScheduler extends Scheduler{
 	private int numJobsCompleted = 0;
 	private int totalTime = 0;
 
-	public RoundRobinScheduler() throws ParseException{
+	public RoundRobinScheduler(){
 		super();
 	}
 

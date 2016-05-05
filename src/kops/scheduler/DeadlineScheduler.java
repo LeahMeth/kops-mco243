@@ -5,16 +5,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-public class JobSchedular extends Scheduler {
-
+public class DeadlineScheduler extends Scheduler{
+	
+	private static final int OVER_HEAD = 3;
+	private static final Random RAND = new Random();
 
 	private List<Job> jobs;
 	private Comparator<Job> comparator;
 
-	public JobSchedular() {
-		super();
-		
-		this.comparator = new PriorityJobComparator();
+
+	public DeadlineScheduler() {
+		this.comparator = new DeadlineComparator();
 	}
 
 	public void run() {
@@ -26,6 +27,8 @@ public class JobSchedular extends Scheduler {
 			Job job = jobs.get(0);
 			int actualTimeSlice = executeJob(job);
 			totalTime += actualTimeSlice;
+			
+			
 
 			if (job != lastJob) {
 				totalTime += OVER_HEAD;
